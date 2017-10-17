@@ -1,4 +1,4 @@
-package hr.fer.oop.lab1.prob2;
+package hr.fer.oop;
 /******************************************************************************
  *  Compilation:  javac Complex.java
  *  Execution:    java Complex

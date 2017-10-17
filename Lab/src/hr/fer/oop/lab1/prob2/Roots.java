@@ -4,7 +4,7 @@ import java.io.Console;
 import java.util.Dictionary;
 import java.util.Map;
 
-import hr.fer.oop.Input;
+import hr.fer.oop.*;
 
 import java.util.HashMap;
 /**
