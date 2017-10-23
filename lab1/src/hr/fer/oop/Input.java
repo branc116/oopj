@@ -1,14 +1,14 @@
 package hr.fer.oop;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.function.Function;
 import java.util.Map;
 
 public class Input<T> {
-    public HashMap<String, T> input;
+    public LinkedHashMap<String, T> input;
     private String genericType;
     public Input(String geType) {
-        input = new HashMap<>();
         this.genericType = geType;
     }
 
@@ -49,7 +49,7 @@ public class Input<T> {
         }
     }
     public Boolean handleInput(String[] paramNames, String[] args, Function<T, String> typeToString, Function<String, T> stringToType, Function<T, Boolean> valueOk){
-        input = new HashMap<String, T>();
+        input = new LinkedHashMap<String, T>();
         for (String var : paramNames) {
             this.input.put(var, null);
         }
@@ -62,19 +62,18 @@ public class Input<T> {
             }catch(Exception ex){
                 System.out.printf("Error with parsing input with 0 arguments%n");
             }
-        }else if (args.length == paramNames.length)
+        }else if (args.length >= paramNames.length)
         {
             try{
                 handleInput(args, typeToString, stringToType, valueOk);
                 isOk = true;
             }catch(Exception ex){
+                ex.printStackTrace();
                 System.out.printf("Error with parsing input with %d arguments%n", args.length);
+
             }
         }
         if (!isOk){
-            // The short answer is, that there is no way to find out the runtime type of generic type parameters in Java. 
-            // I suggest reading the chapter about type erasure in the Java Tutorial for more details.
-            // A popular solution to this is to pass the Class of the type parameter into the constructor of the generic type - I don't wanna do this...
             System.out.printf("Bad input%nGood inputs are:%nNo args%n%d %ss%n", paramNames.length, genericType);
             return false;
         }
