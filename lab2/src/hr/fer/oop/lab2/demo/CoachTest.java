@@ -53,7 +53,7 @@ public class CoachTest {
 
         FootballPlayer notEligiblePlayer = new FootballPlayer("Butatista", "Argentina", 65, 83, PlayingPosition.FW);
 
-        Manager nationalManager = (Manager) new Coach("Ban Vasten", "Dutch", 66, 70, Formation.F442);
+        Manager nationalManager = new Manager("Ban Vasten", "Dutch", 66, 70, Formation.F442);
 
         NationalTeam croatia = new NationalTeam("Croatia", Formation.F352, "Croatia");
         nationalManager.setManagingTeam(croatia);

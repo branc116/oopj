@@ -63,7 +63,7 @@ public class SimpleFootballPlayerCollectionImpl implements SimpleFootballPlayerC
 
     @Override
     public FootballPlayer[] getPlayers() {
-        return (FootballPlayer[])players.toArray();
+        return players.toArray(new FootballPlayer[0]);
     }
 
 }

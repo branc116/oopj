@@ -10,6 +10,12 @@ public class Manager extends Coach implements hr.fer.oop.lab2.welcomepack.Manage
     public Manager() {
         super();
     }
+    public Manager(Integer coachingSkill, Formation formation) {
+        super(coachingSkill, formation);
+    }
+    public Manager(String name, String country, Integer emotion, Integer coachingSkill, Formation formation) {
+        super(name, country, emotion, coachingSkill, formation);
+    }
 
     @Override
     public void pickStartingEleven() {

@@ -33,20 +33,22 @@ $javaMains = $a | Where-Object {
     (Get-Content $_.FullName) -like "*public static void main*";
     # FullName -Like *prob*;
 };
-$javaInputs = Get-ChildItem $javaMains.Directory -File | Where-Object Name -like *input*;
+$javaInputs = Get-ChildItem -File -Recurse | Where-Object Name -like *input*;
 ([System.IO.FileInfo[]]$javaMains).FullName.Replace('\', '.').Split([system.string[]](".src."), [System.StringSplitOptions]::RemoveEmptyEntries).Replace(".java", "") | 
     Where-Object {$_ -notlike "*:*"} | 
     ForEach-Object -Process {
         $cur = $_;
-        $inputs = $javaInputs | Where-Object {
+        Write-Output ("Currently testing: ", $cur, [System.String]::new('-', [System.Console]::WindowWidth),[System.String]::new('-', [System.Console]::WindowWidth));
+        $javaInputs | Where-Object {
             $probName = $_.Directory.FullName.Split('\');
             ([System.String]$cur).Contains($probName[$probName.Length - 1]);
-        };
-        $inputs | ForEach-Object -Process {
+        } |
+        ForEach-Object -Process {
             $content =  get-content $_.FullName;
             $processArgs = "-cp .\bin " + $cur + " " + $content;
-            Write-Output ("Starting new java test with starting args:", $processArgs.TrimEnd(' '));
+            Write-Output ("Starting new java test with starting args:", $processArgs.TrimEnd(' '), "Input file: ", $_.FullName);
             $out = Start-Command -commandTitle $_.Name -commandPath java -workingDirectory .\ -commandArguments $processArgs.TrimEnd(' ');
             Write-Output ("Exit code:", $out.ExitCode, "StdOut:", $out.stdout, "StdErr:", $out.stderr , "Execution time:", ([System.TimeSpan]$out.ExTime).TotalMilliseconds, [System.String]::new('-', [System.Console]::WindowWidth));
         }
-    }
+        Write-Output ("Finished testing for", $cur, [System.String]::new('-', [System.Console]::WindowWidth),[System.String]::new('-', [System.Console]::WindowWidth));
+    };

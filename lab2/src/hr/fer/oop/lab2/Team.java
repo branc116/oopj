@@ -54,7 +54,7 @@ public abstract class Team implements ManageableTeam {
         if (formation != null) {
             _formation = formation;
         } else {
-            System.err.printf("can't set formation to null");
+            System.out.printf("can't set formation to null");
         }
     }
     @Override

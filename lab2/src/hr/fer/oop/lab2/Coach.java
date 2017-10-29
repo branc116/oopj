@@ -14,11 +14,15 @@ public class Coach extends Person {
     }
     public Coach(Integer coachingSkill, Formation formation) {
         super();
+        setCoachingSkill(Constants.DEFAULT_COACHING_SKILL);
+        setFormation(Constants.DEFAULT_FORMATION);
         setCoachingSkill(coachingSkill);
         setFormation(formation);
     }
     public Coach(String name, String country, Integer emotion, Integer coachingSkill, Formation formation) {
         super(name, country, emotion);
+        setCoachingSkill(Constants.DEFAULT_COACHING_SKILL);
+        setFormation(Constants.DEFAULT_FORMATION);
         setCoachingSkill(coachingSkill);
         setFormation(formation);
     }
@@ -27,8 +31,8 @@ public class Coach extends Person {
         return _coachingSkill;
     }
     public void setCoachingSkill(Integer coachingSkill){
-        if (coachingSkill > 100 || coachingSkill < 0) {
-            System.err.printf("Error while setting coaching skill. Valid range is %d to %d. Got value %d.", Constants.MIN_COACHING_SKILL, Constants.MAX_COACHING_SKILL, coachingSkill);
+        if (coachingSkill == null || coachingSkill > 100 || coachingSkill < 0) {
+            System.out.printf("Error while setting coaching skill. Valid range is %d to %d. Got value %d.%n", Constants.MIN_COACHING_SKILL, Constants.MAX_COACHING_SKILL, coachingSkill);
             coachingSkill = Constants.DEFAULT_COACHING_SKILL;
         }
         else
@@ -39,9 +43,7 @@ public class Coach extends Person {
         return _formation;
     }
     public void setFormation(Formation formation){
-        // if (coachingSkill > 100 || coachingSkill < 0)
-        //     System.err.printf("Error while setting coaching skill. Valid range is %d to %d. Got value %d.", Constants.MIN_COACHING_SKILL, Constants.MAX_COACHING_SKILL, coachingSkill);
-        // else
-        _formation =  formation;    
+        if (formation != null)
+            _formation =  formation;
     }
 }

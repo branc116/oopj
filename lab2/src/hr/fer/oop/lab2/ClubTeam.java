@@ -26,7 +26,7 @@ public class ClubTeam extends Team {
 
     public void setReputation(Integer reputation) {
         if (reputation == null || reputation < Constants.MIN_REPUTATION || reputation > Constants.MAX_REPUTATION) {
-            System.err.println("Reputation value is invalid");
+            System.out.println("Reputation value is invalid");
 
             return;
         }
@@ -42,7 +42,7 @@ public class ClubTeam extends Team {
 
     @Override
     public boolean registerPlayer(FootballPlayer player) {
-        if (player == null || player.getPlayingSkill() < this.calculateRating())
+        if (player == null || player.getPlayingSkill() < this.calculateRating()/getRegisteredPlayers().size())
             return false;
         return super.registerPlayer(player);
     }

@@ -19,6 +19,8 @@ public class FootballPlayer extends Person {
     }
     public FootballPlayer(String name, String country, Integer emotion, Integer playingSkill, PlayingPosition playingPosition) {
         super(name, country, emotion);
+        setPlayingSkill(Constants.DEFAULT_PLAYING_SKILL);
+        setPlayingPosition(Constants.DEFAULT_PLAYING_POSITION);
         setPlayingSkill(playingSkill);
         setPlayingPosition(playingPosition);
     }
@@ -27,8 +29,8 @@ public class FootballPlayer extends Person {
         return _playingSkill;
     }
     public void setPlayingSkill(Integer playingSkill){
-        if (playingSkill > 100 || playingSkill < 0){
-            System.err.printf("Error while setting plaing skill. Valid range is %d to %d. Got value %d.", Constants.MIN_PLAYING_SKILL, Constants.MAX_PLAYING_SKILL, playingSkill);
+        if (playingSkill == null || playingSkill > 100 || playingSkill < 0){
+            System.out.printf("Error while setting plaing skill. Valid range is %d to %d. Got value %d.%n", Constants.MIN_PLAYING_SKILL, Constants.MAX_PLAYING_SKILL, playingSkill);
             _playingSkill = Constants.DEFAULT_PLAYING_SKILL;
         } else
             _playingSkill = playingSkill;
@@ -38,9 +40,7 @@ public class FootballPlayer extends Person {
         return _playingPosition;
     }
     public void setPlayingPosition(PlayingPosition playingPosition){
-        // if (coachingSkill > 100 || coachingSkill < 0)
-        //     System.err.printf("Error while setting coaching skill. Valid range is %d to %d. Got value %d.", Constants.MIN_COACHING_SKILL, Constants.MAX_COACHING_SKILL, coachingSkill);
-        // else
-        _playingPosition =  playingPosition;    
+        if (playingPosition != null)
+            _playingPosition =  playingPosition;    
     }
 }

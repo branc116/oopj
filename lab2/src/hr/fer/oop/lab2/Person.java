@@ -8,6 +8,7 @@ public abstract class Person {
     private Integer _emotion;
 
     public Person(String name, String country, Integer emotion) {
+        this();
         setName(name);
         setCountry(country);
         setEmotion(emotion);
@@ -24,8 +25,8 @@ public abstract class Person {
     public void setEmotion(Integer emotion) {
         if (emotion > 100 || emotion < 0)
         {
-            System.err.printf("Error while setting emotion. Valid range is %d to %d. Got value %d.", Constants.MIN_EMOTION, Constants.MAX_EMOTION, emotion);
-            emotion = Constants.DEFAULT_EMOTION;
+            System.out.printf("Error while setting emotion. Valid range is %d to %d. Got value %d.%n", Constants.MIN_EMOTION, Constants.MAX_EMOTION, emotion);
+            // emotion = Constants.DEFAULT_EMOTION;
         }
         else
             _emotion = emotion;
@@ -36,8 +37,6 @@ public abstract class Person {
     private void setName(String name) {
         if (name != null) {
             _name = name;
-        } else {
-            _name = Constants.DEFAULT_PLAYER_NAME;
         }
     }
     public String getCountry() {
@@ -46,8 +45,16 @@ public abstract class Person {
     private void setCountry(String country) {
         if (country != null) {
             _country = country;
-        } else {
-            _country = Constants.DEFAULT_COUNTRY;
         }
+    }
+    @Override
+    public boolean equals(Object arg0) {
+        if (arg0 == null)
+            return false;
+        if (arg0.getClass() == this.getClass()) {
+            return ((Person)(arg0)).getName() == this.getName() &&
+                   ((Person)(arg0)).getCountry() == this.getCountry();
+        }
+        return false;
     }
 }

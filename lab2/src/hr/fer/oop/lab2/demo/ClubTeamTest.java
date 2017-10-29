@@ -43,7 +43,7 @@ public class ClubTeamTest {
         }
         double expected = (10 * Constants.THIRTY_PERCENT + 100 * Constants.SEVENTY_PERCENT) * 20;
         if (Math.abs(reputationTeam.calculateRating() - expected) > DELTA) {
-            System.err.println("TEST FAILED: Reputacija tima ne izracunava se dobro!!");
+            System.err.printf("TEST FAILED: Reputacija tima ne izracunava se dobro!! %f - %f%n",reputationTeam.calculateRating(), expected);
         }
 
 
